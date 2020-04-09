@@ -7,6 +7,9 @@ import org.junit.Test
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
+
+    private val presenter = Presenter()
+
     @Test
     fun example() {
         val iphoneCase = Product(price = 123.5, salePercent = 15, name = "Case1")
@@ -33,6 +36,38 @@ class ExampleUnitTest {
 
         //создали интерфейс
         val listPrinter : ListPrinter = storeBasket
+        //вывели список покупок
+        listPrinter.printList(bookList)
+    }
+
+    @Test
+    fun presenterTest() {
+        presenter.productListPrint()
+        presenter.totalPricePrint()
+    }
+}
+
+class Presenter{
+    //инициализировали содержимое списка
+    private val book1 = Product(price = 150.0, salePercent = 15, name = "Гордость и предубеждение")
+    private val book2 = Product(price = 173.0, salePercent = 10, name = "Приключения Робинзона Крузо")
+    private val book3 = Product(price = 90.0, salePercent = 7, name = "Анжелика и Король")
+    //инициализировали список
+    private val bookList = listOf(book1, book2, book3)
+
+    //создали корзину
+    val storeBasket = Basket(bookList)
+    //иницииализировали PricePrinter для корзины
+    private val pricePrinter : PricePrinter = storeBasket
+    //создали интерфейс
+    private val listPrinter : ListPrinter = storeBasket
+
+    fun totalPricePrint(){
+        print("Общая сумма корзины: ")
+        pricePrinter.print(storeBasket.calculateSumPrice())
+    }
+
+    fun productListPrint(){
         //вывели список покупок
         listPrinter.printList(bookList)
     }
@@ -72,8 +107,9 @@ class Basket (private val productList: List<Product>) : ListPrinter, PricePrinte
 
     override fun printList(productList: List<Product>){
         productList.forEach({product ->
-            print("\n" + product.getName() + " ")
+            print(product.getName() + " : ")
             product.print(product.calcDiscountPrice())
+            print("\n")
         })
     }
 }
