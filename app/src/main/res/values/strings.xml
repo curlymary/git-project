@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">git-project</string>
+    <string name="Header">Оформление заказа</string>
+    <string name="Total">Итого</string>
+    <string name="CostSum">Стоимость товаров</string>
+    <string name="Discount">Скидка</string>
+    <string name="MiddleName">Отчество</string>
+    <string name="FirstName">Имя</string>
+    <string name="LastName">Фамилия</string>
+    <string name="Phone">Телефон</string>
+    <string name="SendOrder">Оформить заказ</string>
+    <string name="ChoosePayWay">Выберите способ оплаты</string>
+    <string name="ByCash">Наличными</string>
+    <string name="ByCard">Картой при получении</string>
 </resources>
