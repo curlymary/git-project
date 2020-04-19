@@ -1,6 +1,6 @@
 package com.example.git_project
 
-class Basket (private val productList: List<Product>) : ListPrinterView, PricePrinterView {
+class Basket (private val productList: List<Product>) : ProductsView {
     /**
      * @return total price of all products in list with applied discount
      */
@@ -24,11 +24,11 @@ class Basket (private val productList: List<Product>) : ListPrinterView, PricePr
         }
     }
 
-    override fun printList(productList: List<Product>){
+    /*override fun printList(productList: List<Product>){
         productList.forEach({product ->
             print(product.getName() + " : ")
             product.print(product.calcDiscountPrice())
             print("\n")
         })
-    }
+    }*/
 }

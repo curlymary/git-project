@@ -7,7 +7,7 @@ class Product  (
     private val price: Double,
     private val salePercent: Int = 0,
     private val name : String
-) : PricePrinterView {
+) : ProductsView {
     /**
      * @return price with applied discount determined by [salePercent]
      *

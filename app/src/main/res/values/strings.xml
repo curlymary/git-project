@@ -12,4 +12,6 @@
     <string name="ChoosePayWay">Выберите способ оплаты</string>
     <string name="ByCash">Наличными</string>
     <string name="ByCard">Картой при получении</string>
+    <string name="PhoneNumber">Номер телефона</string>
+    <string name="PhoneExample">Пример, 89999999999 или +79999999999</string>
 </resources>

@@ -134,54 +134,42 @@
             android:id="@+id/txtLastName"
             android:layout_width="370dp"
             android:layout_height="50dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
             android:ems="10"
             android:hint="@string/LastName"
             android:inputType="textPersonName"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtDiscountSum"
+            app:layout_constraintStart_toStartOf="@+id/txtDiscountText"
             app:layout_constraintTop_toBottomOf="@+id/txtDiscountText" />
 
         <EditText
             android:id="@+id/txtFirstName"
             android:layout_width="370dp"
             android:layout_height="50dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
             android:ems="10"
             android:hint="@string/FirstName"
             android:inputType="textPersonName"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtLastName"
+            app:layout_constraintStart_toStartOf="@+id/txtLastName"
             app:layout_constraintTop_toBottomOf="@+id/txtLastName" />
 
         <EditText
             android:id="@+id/txtMiddleName"
             android:layout_width="370dp"
             android:layout_height="50dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
             android:ems="10"
             android:hint="@string/MiddleName"
             android:inputType="textPersonName"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtFirstName"
+            app:layout_constraintStart_toStartOf="@+id/txtFirstName"
             app:layout_constraintTop_toBottomOf="@+id/txtFirstName" />
 
 
@@ -223,14 +211,14 @@
             android:id="@+id/txtPayMethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="48dp"
             android:paddingLeft="20dp"
             android:text="@string/ChoosePayWay"
             android:textColor="#000000"
             android:textSize="24sp"
-            app:layout_constraintTop_toBottomOf="@+id/txtMiddleName"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="20dp" />
+            app:layout_constraintStart_toStartOf="@+id/txtPhoneNumber"
+            app:layout_constraintTop_toBottomOf="@+id/txtPhoneNumber"
+            tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/btnOrder"
@@ -248,6 +236,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <EditText
+            android:id="@+id/txtPhoneNumber"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/PhoneNumber"
+            android:inputType="phone"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/txtMiddleName"
+            app:layout_constraintStart_toStartOf="@+id/txtMiddleName"
+            app:layout_constraintTop_toBottomOf="@+id/txtMiddleName" />
+
+        <TextView
+            android:id="@+id/txtPhoneExample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/PhoneExample"
+            app:layout_constraintEnd_toEndOf="@+id/txtPhoneNumber"
+            app:layout_constraintTop_toBottomOf="@+id/txtPhoneNumber" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
