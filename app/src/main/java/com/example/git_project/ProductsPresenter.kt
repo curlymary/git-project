@@ -42,22 +42,12 @@ class ProductsPresenter : MvpPresenter<ProductsView> () {
         //проверили длину номера
         if(text.length <= 11){
             //проверили первый символ
-            if((text[0] != '8')||(text[0] != '+')){
-                return false
-            }
-            else{
-                return true
-            }
+            return !((text[0] != '8')||(text[0] != '+'))
             //проверили второй символ
             if(text.length >= 2) {
                 //комбинация +7
                 if(text[0] == '+'){
-                    if(text[1] != '7'){
-                        return true
-                    }
-                    else{
-                        return false
-                    }
+                    return text[1] != '7'
                 }
                 else{
                     return false
@@ -66,12 +56,7 @@ class ProductsPresenter : MvpPresenter<ProductsView> () {
         }
         else{
             //скорректировали длину номера на случай +7
-            if((text.length == 12)&&(text[0] == '+')&&(text[1] == '7')){
-                return false
-            }
-            else{
-                return true
-            }
+            return !((text.length == 12)&&(text[0] == '+')&&(text[1] == '7'))
         }
     }
 

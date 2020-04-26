@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">git-project</string>
+    <string name="app_name">Магазин</string>
     <string name="Header">Оформление заказа</string>
     <string name="Total">Итого</string>
     <string name="CostSum">Стоимость товаров</string>
@@ -14,4 +14,11 @@
     <string name="ByCard">Картой при получении</string>
     <string name="PhoneNumber">Номер телефона</string>
     <string name="PhoneExample">Пример, 89999999999 или +79999999999</string>
+    <string name="HeaderCatalog">Каталог товаров</string>
+    <string name="MakeAnOrder">Оформить заказ</string>
+    <string name="HeaderProduct">Информация о товаре</string>
+    <string name="HeaderBasket">Корзина</string>
+    <string name="GoToBasket">Добавить в корзину</string>
+    <string name="ProductDetail">Просмотреть товар</string>
+    <string name="ToCatalog">К каталогу</string>
 </resources>

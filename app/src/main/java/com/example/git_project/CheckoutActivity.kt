@@ -1,5 +1,6 @@
 package com.example.git_project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,15 +9,23 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.git_project.CatalogActivity.Companion.IS_USER_AUTH
+import com.example.git_project.CatalogActivity.Companion.PRODUCT_ID
+import com.example.git_project.CatalogActivity.Companion.REQUEST_AUTH
+import kotlinx.android.synthetic.main.catalog_layout.*
+import kotlinx.android.synthetic.main.checkout_layout.*
 
-class MainActivity : AppCompatActivity(), ProductsView
+class CheckoutActivity : BaseActivity(), ProductsView
 {
     private val presenter = ProductsPresenter()
+    private var isAuth : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.checkout_layout)
+
+        val productID = intent.extras?.getInt(PRODUCT_ID, -1)
+        Log.d(tag, productID.toString())
 
         txtTotalSum.text = "2000Р"
         txtDiscountSum.text = "300Р"
@@ -25,9 +34,13 @@ class MainActivity : AppCompatActivity(), ProductsView
         presenter.attachView(this)
 
         btnOrder.setOnClickListener{
-            Toast.makeText(this,"test", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this,"test", Toast.LENGTH_SHORT).show()
+            isAuth = true
+            setResult(REQUEST_AUTH, Intent().apply{
+                putExtra(IS_USER_AUTH, isAuth)
+            })
+            startActivityForResult(intent, REQUEST_AUTH)
         }
-
         setListeners()
 
         //presenter.totalPricePrint()
@@ -104,6 +117,10 @@ class MainActivity : AppCompatActivity(), ProductsView
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+
+        imgArrowCheckout.setOnClickListener{
+            finish()
+        }
     }
 
     fun EditText.ShowError(visible : Boolean){
