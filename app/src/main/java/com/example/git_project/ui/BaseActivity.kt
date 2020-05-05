@@ -1,4 +1,4 @@
-package com.example.git_project
+package com.example.git_project.ui
 
 import android.os.Bundle
 import android.util.Log

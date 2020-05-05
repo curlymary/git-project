@@ -1,21 +1,20 @@
-package com.example.git_project
+package com.example.git_project.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.EditText
-import android.widget.Toast
-import com.example.git_project.CatalogActivity.Companion.IS_USER_AUTH
-import com.example.git_project.CatalogActivity.Companion.PRODUCT_ID
-import com.example.git_project.CatalogActivity.Companion.REQUEST_AUTH
-import kotlinx.android.synthetic.main.catalog_layout.*
+import com.example.git_project.ui.CatalogActivity.Companion.IS_USER_AUTH
+import com.example.git_project.ui.CatalogActivity.Companion.PRODUCT_ID
+import com.example.git_project.ui.CatalogActivity.Companion.REQUEST_AUTH
+import com.example.git_project.presenter.ProductsPresenter
+import com.example.git_project.R
 import kotlinx.android.synthetic.main.checkout_layout.*
 
-class CheckoutActivity : BaseActivity(), ProductsView
+class CheckoutActivity : BaseActivity(),
+    ProductsView
 {
     private val presenter = ProductsPresenter()
     private var isAuth : Boolean = false

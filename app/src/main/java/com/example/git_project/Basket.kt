@@ -1,6 +1,9 @@
 package com.example.git_project
 
-class Basket (private val productList: List<Product>) : ProductsView {
+import com.example.git_project.ui.ProductsView
+
+class Basket (private val productList: List<Product>) :
+    ProductsView {
     /**
      * @return total price of all products in list with applied discount
      */

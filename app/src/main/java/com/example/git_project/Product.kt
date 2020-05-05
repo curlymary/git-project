@@ -1,5 +1,7 @@
 package com.example.git_project
 
+import com.example.git_project.ui.ProductsView
+
 class Product  (
     /**
      * Must be positive
@@ -16,6 +18,14 @@ class Product  (
      */
     fun getName () : String{
         return this.name
+    }
+
+    fun getSalePercent() : Int{
+        return this.salePercent
+    }
+
+    fun getPrice() : Double{
+        return this.price
     }
 
     fun calcDiscountPrice(): Double = price * (1 - salePercent / 100.0)
