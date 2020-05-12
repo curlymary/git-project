@@ -1,21 +1,31 @@
-package com.example.git_project
+package com.example.git_project.domain.model
 
-import com.example.git_project.ui.ProductsView
+import android.os.Parcelable
+import com.example.git_project.presenter.ProductsView
+import kotlinx.android.parcel.Parcelize
 
-class Product  (
+@Parcelize
+class Product (
     /**
      * Must be positive
      */
+    private val id : Long,
     private val price: Double,
     private val salePercent: Int = 0,
-    private val name : String
-) : ProductsView {
+    private val name : String,
+    private val imgUrl : String
+
+) : Parcelable {
     /**
      * @return price with applied discount determined by [salePercent]
      *
      * If [salePercent] is more than 100 than product will have negative price
      * If [salePercent] less than 0 product price will be increased
      */
+    fun getId() : Long{
+        return  this.id
+    }
+
     fun getName () : String{
         return this.name
     }
@@ -28,9 +38,13 @@ class Product  (
         return this.price
     }
 
+    fun getImgUrl() : String{
+        return this.imgUrl
+    }
+
     fun calcDiscountPrice(): Double = price * (1 - salePercent / 100.0)
 
-    override fun print(price: Double){
+    /*override fun print(price: Double){
         val finalPrice : String
         if(price >= 0){
             finalPrice  = if (Math.floor(price) == (price)) Math.floor(price).toInt().toString() else String.format("%.2f", price)
@@ -39,5 +53,5 @@ class Product  (
         else {
             print("Цена не может принимать отрицательное значение")
         }
-    }
+    }*/
 }

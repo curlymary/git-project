@@ -1,5 +1,7 @@
 package com.example.git_project
 
+import com.example.git_project.domain.model.Basket
+import com.example.git_project.domain.model.Product
 import org.junit.Test
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -8,11 +10,15 @@ import org.junit.Test
  */
 class ExampleUnitTest {
 
-    private val presenter = Presenter()
+   /* private val presenter = Presenter()
 
     @Test
     fun example() {
-        val iphoneCase = Product(price = 123.5, salePercent = 15, name = "Case1")
+        val iphoneCase = Product(
+            price = 123.5,
+            salePercent = 15,
+            name = "Case1"
+        )
         val pricePrinter: PricePrinter = iphoneCase
 
         val discountIphoneCasePrice = iphoneCase.calcDiscountPrice()
@@ -22,13 +28,25 @@ class ExampleUnitTest {
     @Test
     fun basketTest() {
         //инициализировали содержимое списка
-        val book1 = Product(price = 150.0, salePercent = 15, name = "Гордость и предубеждение")
-        val book2 = Product(price = 173.0, salePercent = 10, name = "Приключения Робинзона Крузо")
-        val book3 = Product(price = 90.0, salePercent = 7, name = "Анжелика и Король")
+        val book1 = Product(
+            price = 150.0,
+            salePercent = 15,
+            name = "Гордость и предубеждение"
+        )
+        val book2 = Product(
+            price = 173.0,
+            salePercent = 10,
+            name = "Приключения Робинзона Крузо"
+        )
+        val book3 = Product(
+            price = 90.0,
+            salePercent = 7,
+            name = "Анжелика и Король"
+        )
         //инициализировали список
         val bookList = listOf(book1, book2, book3)
         //создали корзину
-        val storeBasket = Basket(bookList)
+        /*val storeBasket = Basket(bookList)
         //вывели сумму корзины
         val pricePrinter : PricePrinter = storeBasket
         print("Общая сумма корзины: ")
@@ -37,7 +55,7 @@ class ExampleUnitTest {
         //создали интерфейс
         val listPrinter : ListPrinter = storeBasket
         //вывели список покупок
-        listPrinter.printList(bookList)
+        listPrinter.printList(bookList)*/
     }
 
     @Test
@@ -49,9 +67,21 @@ class ExampleUnitTest {
 
 class Presenter{
     //инициализировали содержимое списка
-    private val book1 = Product(price = 150.0, salePercent = 15, name = "Гордость и предубеждение")
-    private val book2 = Product(price = 173.0, salePercent = 10, name = "Приключения Робинзона Крузо")
-    private val book3 = Product(price = 90.0, salePercent = 7, name = "Анжелика и Король")
+    private val book1 = Product(
+        price = 150.0,
+        salePercent = 15,
+        name = "Гордость и предубеждение"
+    )
+    private val book2 = Product(
+        price = 173.0,
+        salePercent = 10,
+        name = "Приключения Робинзона Крузо"
+    )
+    private val book3 = Product(
+        price = 90.0,
+        salePercent = 7,
+        name = "Анжелика и Король"
+    )
     //инициализировали список
     private val bookList = listOf(book1, book2, book3)
 
@@ -151,5 +181,5 @@ class Product  (
         else {
             print("Цена не может принимать отрицательное значение")
         }
-    }
+    }*/
 }

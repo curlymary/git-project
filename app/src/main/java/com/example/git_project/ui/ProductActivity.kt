@@ -1,11 +1,9 @@
-package com.example.git_project
+package com.example.git_project.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.example.git_project.ui.BaseActivity
-import com.example.git_project.ui.BasketActivity
-import com.example.git_project.ui.CatalogActivity
+import com.example.git_project.R
 import kotlinx.android.synthetic.main.product_layout.*
 
 class ProductActivity : BaseActivity(){

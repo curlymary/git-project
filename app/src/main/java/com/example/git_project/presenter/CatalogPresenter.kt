@@ -1,9 +1,14 @@
 package com.example.git_project.presenter
 
-import com.example.git_project.ui.CatalogView
+import androidx.core.graphics.convertTo
+import com.example.git_project.domain.ViewedProductDao
+import com.example.git_project.domain.model.Product
+import moxy.InjectViewState
 import moxy.MvpPresenter
+import java.util.function.IntToLongFunction
 
-class CatalogPresenter : MvpPresenter<CatalogView>() {
+@InjectViewState
+class CatalogPresenter (private val viewedProductDao: ViewedProductDao): MvpPresenter<CatalogView>() {
     var list = mutableListOf(
         "Телевизоры",
         "Планшеты",
@@ -16,6 +21,90 @@ class CatalogPresenter : MvpPresenter<CatalogView>() {
         "Компьютеры",
         "Ноутбуки")
 
+    //инициализировали содержимое списка
+    private val book1 = Product(
+        id = 1,
+        price = 150.0,
+        salePercent = 15,
+        name = "Гордость и предубеждение",
+        imgUrl = ""
+    )
+    private val book2 = Product(
+        id = 2,
+        price = 173.0,
+        salePercent = 10,
+        name = "Приключения Робинзона Крузо",
+        imgUrl = ""
+    )
+    private val book3 = Product(
+        id = 3,
+        price = 90.0,
+        salePercent = 7,
+        name = "Анжелика и Король",
+        imgUrl = ""
+    )
+    private val book4 = Product(
+        id = 4,
+        price = 79.0,
+        salePercent = 10,
+        name = "Унесенные ветром",
+        imgUrl = ""
+    )
+    private val book5 = Product(
+        id = 5,
+        price = 200.0,
+        salePercent = 5,
+        name = "Колобок",
+        imgUrl = ""
+    )
+    private val book6 = Product(
+        id = 6,
+        price = 170.0,
+        salePercent = 15,
+        name = "Капитан Немо",
+        imgUrl = ""
+    )
+    private val book7 = Product(
+        id = 7,
+        price = 150.0,
+        salePercent = 10,
+        name = "Денискины рассказы",
+        imgUrl = ""
+    )
+    private val book8 = Product(
+        id = 8,
+        price = 60.0,
+        salePercent = 11,
+        name = "Война и мир",
+        imgUrl = ""
+    )
+    private val book9 = Product(
+        id = 9,
+        price = 190.0,
+        salePercent = 4,
+        name = "Вино из одуванчиков",
+        imgUrl = ""
+    )
+    private val book10 = Product(
+        id = 10,
+        price = 90.0,
+        salePercent = 6,
+        name = "100 рецептов",
+        imgUrl = ""
+    )
+
+    private val book11 = Product(
+        id = 11,
+        price = 125.0,
+        salePercent = 15,
+        name = "Просто добавь воды",
+        imgUrl = ""
+    )
+
+    var productList = mutableListOf(book1, book2, book3, book4, book5, book6, book7, book8, book9, book10)
+
+    var viewedProductList : MutableList<Long> = mutableListOf(1,2,3)
+
     fun setData(){
         viewState.setCategories(list)
     }
@@ -25,5 +114,33 @@ class CatalogPresenter : MvpPresenter<CatalogView>() {
         list.remove(category)
         viewState.removeItem(position)
     }
-}
 
+    fun setViewedData(productIds: List<Long>){
+        val viewedProducts = mutableListOf<Product>()
+        for (i in 0 until productList.size) {
+            for(j in 0 until productIds.size){
+                if(productIds[j] == productList[i].getId())
+                    viewedProducts.add(productList[i])
+            }
+        }
+        viewState.setViewedProducts(viewedProducts)
+    }
+
+    override fun destroyView(view: CatalogView?) {
+        super.destroyView(view)
+    }
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        setData()
+
+    }
+
+    override fun attachView(view: CatalogView?) {
+        super.attachView(view)
+        val productIds = viewedProductDao.getAllProducts()
+
+        setViewedData(productIds)
+        viewState.showProductIds(productIds)
+    }
+}

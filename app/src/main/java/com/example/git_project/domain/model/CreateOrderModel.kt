@@ -1,4 +1,4 @@
-package com.example.git_project
+package com.example.git_project.domain.model
 
 /**
  * Модель для создания заказа

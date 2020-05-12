@@ -4,18 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.git_project.Product
+import com.example.git_project.domain.model.Product
 import com.example.git_project.R
 import com.example.git_project.presenter.BasketPresenter
+import com.example.git_project.presenter.BasketView
+import com.example.git_project.ui.DetailedActivity.Companion.PRODUCT_TAG
 import kotlinx.android.synthetic.main.basket_layout.*
-import kotlinx.android.synthetic.main.item_basket.*
 
-class BasketActivity : BaseActivity(), BasketView {
+class BasketActivity : BaseActivity(),
+    BasketView {
 
     private val presenter = BasketPresenter()
-    private val adapter = ProductAdapter{
-            product -> presenter.removeItem(product)
-    }
+    private val adapter = ProductAdapter(
+        onDeleteClick = { product ->  presenter.removeItem(product)},
+        onProductClick = { product -> showProductDetail(product)}
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -43,15 +46,14 @@ class BasketActivity : BaseActivity(), BasketView {
             finish()
         }
 
-        basketRv.layoutManager = LinearLayoutManager(this)
-        basketRv.adapter = adapter
-        presenter.attachView(this)
-        presenter.setData()
-
         btnAddProduct.setOnClickListener{
             presenter.addItem()
         }
 
+        basketRv.layoutManager = LinearLayoutManager(this)
+        basketRv.adapter = adapter
+        presenter.attachView(this)
+        presenter.setData()
     }
 
     override fun setProducts(list: List<Product>) {
@@ -64,5 +66,11 @@ class BasketActivity : BaseActivity(), BasketView {
 
     override fun removeItem(position: Int) {
         adapter.notifyItemRemoved(position)
+    }
+
+    override fun showProductDetail(product: Product) {
+        startActivity(Intent(this, DetailedActivity::class.java).apply {
+            putExtra(PRODUCT_TAG, product)
+        })
     }
 }

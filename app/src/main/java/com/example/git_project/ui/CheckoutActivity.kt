@@ -11,6 +11,7 @@ import com.example.git_project.ui.CatalogActivity.Companion.PRODUCT_ID
 import com.example.git_project.ui.CatalogActivity.Companion.REQUEST_AUTH
 import com.example.git_project.presenter.ProductsPresenter
 import com.example.git_project.R
+import com.example.git_project.presenter.ProductsView
 import kotlinx.android.synthetic.main.checkout_layout.*
 
 class CheckoutActivity : BaseActivity(),

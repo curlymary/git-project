@@ -1,6 +1,6 @@
-package com.example.git_project.ui
+package com.example.git_project.presenter
 
-import com.example.git_project.Product
+import com.example.git_project.domain.model.Product
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
@@ -15,4 +15,7 @@ interface BasketView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun addItem(position : Int)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showProductDetail(product : Product)
 }

@@ -1,6 +1,6 @@
-package com.example.git_project
+package com.example.git_project.domain.model
 
-import com.example.git_project.ui.ProductsView
+import com.example.git_project.presenter.ProductsView
 
 class Basket (private val productList: List<Product>) :
     ProductsView {

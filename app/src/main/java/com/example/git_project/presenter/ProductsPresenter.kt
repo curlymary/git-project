@@ -1,28 +1,33 @@
 package com.example.git_project.presenter
 
-import com.example.git_project.Basket
-import com.example.git_project.CreateOrderModel
-import com.example.git_project.Product
-import com.example.git_project.ui.ProductsView
+import com.example.git_project.domain.model.Basket
+import com.example.git_project.domain.model.CreateOrderModel
+import com.example.git_project.domain.model.Product
 import moxy.MvpPresenter
 
 class ProductsPresenter : MvpPresenter<ProductsView> () {
 
     //инициализировали содержимое списка
     private val book1 = Product(
+        id = 1,
         price = 150.0,
         salePercent = 15,
-        name = "Гордость и предубеждение"
+        name = "Гордость и предубеждение",
+        imgUrl = ""
     )
     private val book2 = Product(
+        id = 2,
         price = 173.0,
         salePercent = 10,
-        name = "Приключения Робинзона Крузо"
+        name = "Приключения Робинзона Крузо",
+        imgUrl = ""
     )
     private val book3 = Product(
+        id = 3,
         price = 90.0,
         salePercent = 7,
-        name = "Анжелика и Король"
+        name = "Анжелика и Король",
+        imgUrl = ""
     )
     //инициализировали список
     private val bookList = listOf(book1, book2, book3)

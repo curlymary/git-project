@@ -1,6 +1,6 @@
 package com.example.git_project.ui
 
-import com.example.git_project.Product
+import com.example.git_project.domain.model.Product
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,9 @@ import com.example.git_project.R
 import kotlinx.android.synthetic.main.item_basket.view.*
 
 class ProductAdapter(
-    private val onDeleteClick : (product: Product) -> Unit) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+    private val onDeleteClick : (product: Product) -> Unit,
+    private val onProductClick : (product: Product) -> Unit
+) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     private var products : List<Product> = listOf()
 
@@ -31,12 +33,20 @@ class ProductAdapter(
         holder.bind(products[position])
     }
 
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
+    }
+
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
         fun bind(product: Product){
             itemView.basketTv.text = product.getName() + " " + product.getPrice() + "p. " + "(" + product.getSalePercent() + "%)"
             itemView.deleteBasketTv.setOnClickListener{
                 onDeleteClick(product)
+            }
+
+            itemView.setOnClickListener{
+                onProductClick(product)
             }
         }
     }

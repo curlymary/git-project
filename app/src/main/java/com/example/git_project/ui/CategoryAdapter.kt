@@ -1,16 +1,17 @@
 package com.example.git_project.ui
 
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.git_project.R
+import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_category.view.*
 
 class CategoryAdapter (
     private val onDeleteClick : (string: String) -> Unit) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
-
     private var categories : List<String> = listOf()
 
     fun setData(categories: List<String>){
@@ -19,8 +20,8 @@ class CategoryAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryAdapter.ViewHolder {
-       Log.d("Adapter", "onCreateViewFolder")
-       return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false))
+        Log.d("Adapter", "onCreateViewFolder")
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false))
     }
 
     override fun getItemCount(): Int = categories.size
@@ -30,12 +31,12 @@ class CategoryAdapter (
         holder.bind(categories[position])
     }
 
-    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(text: String){
-            itemView.categoryTv.text = text
-            itemView.deleteTv.setOnClickListener{
-               onDeleteClick(text)
+            containerView.categoryTv.text = text
+            containerView.deleteTv.setOnClickListener{
+                onDeleteClick(text)
             }
         }
     }

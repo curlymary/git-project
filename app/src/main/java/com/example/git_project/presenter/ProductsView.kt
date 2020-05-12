@@ -1,4 +1,4 @@
-package com.example.git_project.ui
+package com.example.git_project.presenter
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType

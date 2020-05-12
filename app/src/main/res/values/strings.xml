@@ -21,4 +21,17 @@
     <string name="GoToBasket">Добавить в корзину</string>
     <string name="ProductDetail">Просмотреть товар</string>
     <string name="ToCatalog">К каталогу</string>
+
+    <string name="price">Цена</string>
+    <string name="product_title">Title</string>
+    <string name="price_with_discount">Итог</string>
+    <string name="discount_present">Процент</string>
+    <string name="btn_buy_cart">Оформить заказ</string>
+    <string name="total_price">Итог</string>
+    <string name="discount_price">Скидка</string>
+    <string name="price_header">Цена</string>
+    <string name="title_header">Наименование</string>
+    <string name="detailed_photo_title">detailed photo</string>
+    <string name="some_text">someText</string>
+    <string name="ViewedHeaderCatalog">Просмотренные товары</string>
 </resources>

@@ -3,9 +3,10 @@ package com.example.git_project.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import moxy.MvpAppCompatActivity
 
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : MvpAppCompatActivity() {
     val tag = this.javaClass.simpleName
 
     public override fun onCreate(savedInstanceState: Bundle?) {
