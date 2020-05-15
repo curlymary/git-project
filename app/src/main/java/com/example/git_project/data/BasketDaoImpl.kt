@@ -1,13 +1,12 @@
 package com.example.git_project.data
 
 import android.content.SharedPreferences
-import android.provider.Settings.Global.putString
 import androidx.core.content.edit
-import com.example.git_project.domain.ViewedProductDao
+import com.example.git_project.domain.BasketDao
 
-class ViewedProductDaoImpl(
+class BasketDaoImpl(
     private val sharedPreferences: SharedPreferences
-) : ViewedProductDao {
+) : BasketDao {
 
     private var savedProductIds: List<Long>
         get() = sharedPreferences.getString(PRODUCT_TAG, null)
@@ -30,6 +29,15 @@ class ViewedProductDaoImpl(
 
     override fun getAllProducts(): List<Long> {
         return savedProductIds
+    }
+
+    override fun deleteProduct(productId: Long) {
+        val productIds: List<Long> = savedProductIds
+        val newProductIds = mutableListOf<Long>().apply {
+            remove(productId)
+            addAll(productIds.filter { it != productId })
+        }
+        savedProductIds = newProductIds
     }
 
     companion object {

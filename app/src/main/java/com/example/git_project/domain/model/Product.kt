@@ -1,7 +1,6 @@
 package com.example.git_project.domain.model
 
 import android.os.Parcelable
-import com.example.git_project.presenter.ProductsView
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -10,6 +9,7 @@ class Product (
      * Must be positive
      */
     private val id : Long,
+    private val categoryId : Long,
     private val price: Double,
     private val salePercent: Int = 0,
     private val name : String,
@@ -24,6 +24,10 @@ class Product (
      */
     fun getId() : Long{
         return  this.id
+    }
+
+    fun getCategoryId() : Long{
+        return this.categoryId
     }
 
     fun getName () : String{
@@ -44,14 +48,9 @@ class Product (
 
     fun calcDiscountPrice(): Double = price * (1 - salePercent / 100.0)
 
-    /*override fun print(price: Double){
+    fun makeFinalPrice(price : Double) : String{
         val finalPrice : String
-        if(price >= 0){
-            finalPrice  = if (Math.floor(price) == (price)) Math.floor(price).toInt().toString() else String.format("%.2f", price)
-            print(finalPrice +"P")
-        }
-        else {
-            print("Цена не может принимать отрицательное значение")
-        }
-    }*/
+        finalPrice  = if (Math.floor(price) == (price)) Math.floor(price).toInt().toString() else String.format("%.2f", price)
+        return finalPrice + "P"
+    }
 }

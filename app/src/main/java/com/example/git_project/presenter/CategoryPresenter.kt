@@ -6,7 +6,7 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 
 @InjectViewState
-class BasketPresenter(private val basketDao: BasketDao) : MvpPresenter<BasketView>() {
+class CategoryPresenter(private val categoryId : Long, private val basketDao: BasketDao): MvpPresenter<CategoryView>() {
     //инициализировали содержимое списка
     private val product1 = Product(id = 1, categoryId = 1, price = 150.0, salePercent = 15, name = "Скрэмбл c тофу", imgUrl = "")
     private val product2 = Product(id = 2,  categoryId = 1, price = 173.0, salePercent = 10, name = "Салат с горбушей", imgUrl = "")
@@ -44,32 +44,21 @@ class BasketPresenter(private val basketDao: BasketDao) : MvpPresenter<BasketVie
         product13, product14, product15, product16, product17,
         product18, product19, product20, product21, product22, product23, product24)
 
-    fun setProducts(productIds: List<Long>){
-        val basketProducts = mutableListOf<Product>()
-        for (i in 0 until list.size) {
-            for(j in 0 until productIds.size){
-                if(productIds[j] == list[i].getId())
-                    basketProducts.add(list[i])
-            }
-        }
-        viewState.setBasketProducts(basketProducts)
+    fun setData(categoryId : Long){
+        val productsByCategory = list.filter { it.getCategoryId() ==  categoryId}
+        viewState.setProducts(productsByCategory)
     }
 
-    fun removeItem(product : Product){
-        val position = list.indexOf(product)
-        basketDao.deleteProduct(product.getId())
-        viewState.removeProduct(position)
+    fun addItemToBasket(product : Product){
+        basketDao.addProduct(product.getId())
     }
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        val productIds = basketDao.getAllProducts()
-        setProducts(productIds)
+        setData(categoryId)
     }
 
-    override fun attachView(view: BasketView?) {
+    override fun attachView(view: CategoryView?) {
         super.attachView(view)
-        val productIds = basketDao.getAllProducts()
-        setProducts(productIds)
     }
 }

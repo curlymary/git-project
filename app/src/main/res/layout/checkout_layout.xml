@@ -12,30 +12,31 @@
         tools:context=".MainActivity">
 
         <TextView
-            android:id="@+id/txtHeader"
+            android:id="@+id/checkoutHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:width="40dp"
-            android:height="40dp"
+            android:width="0dp"
+            android:height="64dp"
+            android:background="@color/colorPrimary"
             android:gravity="center"
-            android:text="@string/Header"
+            android:text="@string/MakeAnOrder"
             android:textAllCaps="false"
-            android:textColor="#000000"
+            android:textColor="@android:color/background_light"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imgArrowCheckout"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtHeader"
-            app:layout_constraintStart_toStartOf="@+id/txtHeader"
-            app:layout_constraintTop_toTopOf="@+id/txtHeader"
-            app:srcCompat="@drawable/ic_arrow_back"
+            android:layout_width="40dp"
+            android:layout_height="64dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/detailHeader"
+            app:layout_constraintStart_toStartOf="@+id/detailHeader"
+            app:layout_constraintTop_toTopOf="@+id/detailHeader"
+            app:srcCompat="@drawable/ic_arrow_back_white"
             tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
         <TextView
@@ -232,6 +233,7 @@
 
         <Button
             android:id="@+id/btnOrder"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="320dp"
             android:layout_height="59dp"
             android:layout_marginStart="20dp"
@@ -239,7 +241,6 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:background="#00BCD4"
             android:text="@string/SendOrder"
             android:textColor="#FFFFFF"
             android:textSize="18sp"

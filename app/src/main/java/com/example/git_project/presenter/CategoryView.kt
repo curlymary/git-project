@@ -6,14 +6,14 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface BasketView : MvpView {
+interface CategoryView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun setBasketProducts(list: List<Product>)
+    fun setProducts(list: List<Product>)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun removeProduct(position : Int)
+    fun addProductToBasket(product: Product)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showProductDetail(product : Product)
+    fun showProductDetail(product: Product)
 }

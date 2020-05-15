@@ -10,45 +10,48 @@
         android:id="@+id/basketHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:width="40dp"
-        android:height="40dp"
+        android:width="0dp"
+        android:height="64dp"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="@string/HeaderBasket"
         android:textAllCaps="false"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imgArrowBasket"
+        android:layout_width="40dp"
+        android:layout_height="64dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/basketHeader"
+        app:layout_constraintStart_toStartOf="@+id/basketHeader"
+        app:layout_constraintTop_toTopOf="@+id/basketHeader"
+        app:srcCompat="@drawable/ic_arrow_back_white"
+        tools:ignore="MissingConstraints,VectorDrawableCompat" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/basketRv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
+        app:layout_constraintBottom_toTopOf="@+id/btnMakeAnOrder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/basketHeader" />
 
-    <ImageView
-        android:id="@+id/imgArrowBasket"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtHeader"
-        app:layout_constraintStart_toStartOf="@+id/txtHeader"
-        app:layout_constraintTop_toTopOf="@+id/txtHeader"
-        app:srcCompat="@drawable/ic_arrow_back"
-        tools:ignore="MissingConstraints,VectorDrawableCompat" />
-
     <Button
         android:id="@+id/btnMakeAnOrder"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="24dp"
+        android:width="165dp"
         android:text="@string/MakeAnOrder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,23 +61,16 @@
 
     <Button
         android:id="@+id/btnBasketToCatalog"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:width="165dp"
         android:text="@string/ToCatalog"
         app:layout_constraintBottom_toBottomOf="@+id/btnMakeAnOrder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnMakeAnOrder"
         app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btnAddProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Добавить продукт"
-        app:layout_constraintBottom_toTopOf="@+id/btnMakeAnOrder"
-        app:layout_constraintEnd_toEndOf="@+id/btnMakeAnOrder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

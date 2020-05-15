@@ -1,6 +1,6 @@
 package com.example.git_project.domain
 
-interface ViewedProductDao {
+interface BasketDao {
 
     /**
      * save this product id as viewed
@@ -12,4 +12,6 @@ interface ViewedProductDao {
      * might be empty
      * */
     fun getAllProducts(): List<Long>
+
+    fun deleteProduct(productId: Long)
 }

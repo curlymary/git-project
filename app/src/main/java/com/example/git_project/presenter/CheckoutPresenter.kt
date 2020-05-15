@@ -1,12 +1,12 @@
 package com.example.git_project.presenter
 
 import com.example.git_project.domain.BasketDao
+import com.example.git_project.domain.model.CreateOrderModel
 import com.example.git_project.domain.model.Product
-import moxy.InjectViewState
 import moxy.MvpPresenter
 
-@InjectViewState
-class BasketPresenter(private val basketDao: BasketDao) : MvpPresenter<BasketView>() {
+class CheckoutPresenter(private val basketDao: BasketDao) : MvpPresenter<CheckoutView> () {
+
     //инициализировали содержимое списка
     private val product1 = Product(id = 1, categoryId = 1, price = 150.0, salePercent = 15, name = "Скрэмбл c тофу", imgUrl = "")
     private val product2 = Product(id = 2,  categoryId = 1, price = 173.0, salePercent = 10, name = "Салат с горбушей", imgUrl = "")
@@ -44,32 +44,102 @@ class BasketPresenter(private val basketDao: BasketDao) : MvpPresenter<BasketVie
         product13, product14, product15, product16, product17,
         product18, product19, product20, product21, product22, product23, product24)
 
-    fun setProducts(productIds: List<Long>){
-        val basketProducts = mutableListOf<Product>()
-        for (i in 0 until list.size) {
-            for(j in 0 until productIds.size){
-                if(productIds[j] == list[i].getId())
-                    basketProducts.add(list[i])
-            }
-        }
-        viewState.setBasketProducts(basketProducts)
-    }
+    private var sumPrice : Double = 0.0;
+    private var discountPrice : Double= 0.0;
+    private var finalPrice : Double= 0.0;
 
-    fun removeItem(product : Product){
-        val position = list.indexOf(product)
-        basketDao.deleteProduct(product.getId())
-        viewState.removeProduct(position)
-    }
+    private val model = CreateOrderModel()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         val productIds = basketDao.getAllProducts()
-        setProducts(productIds)
+        setPrices(productIds)
+        viewState.setSumPrice(makeFinalPrice(sumPrice))
+        viewState.setDiscountPrice(makeFinalPrice(discountPrice))
+        viewState.setFinalPrice(makeFinalPrice(finalPrice))
     }
 
-    override fun attachView(view: BasketView?) {
+    override fun attachView(view: CheckoutView?) {
         super.attachView(view)
         val productIds = basketDao.getAllProducts()
-        setProducts(productIds)
+        setPrices(productIds)
+        viewState.setSumPrice(makeFinalPrice(sumPrice))
+        viewState.setDiscountPrice(makeFinalPrice(discountPrice))
+        viewState.setFinalPrice(makeFinalPrice(finalPrice))
     }
+
+    fun checkFirstName(text : String){
+        if(!checkSymbols((text))) model.firstName = text
+        viewState.showErrorForFirstName(checkSymbols(text))
+    }
+
+    fun checkMiddleName(text : String){
+        if(!checkSymbols((text))) model.middleName = text
+        viewState.showErrorForMiddleName(checkSymbols(text))
+    }
+
+    fun checkLastName(text : String){
+        if(!checkSymbols((text)))  model.lastName = text
+        viewState.showErrorForLastName(checkSymbols(text))
+    }
+
+    fun checkPhoneNumber(text : String){
+        if(!checkPhoneNumberSymbols((text))) model.phoneNumber = text
+        viewState.showErrorForPhoneNumber(checkPhoneNumberSymbols(text))
+    }
+
+    private fun checkSymbols(text : String) : Boolean = text.length < 3
+
+    private fun checkPhoneNumberSymbols (text : String) : Boolean{
+        //проверили длину номера
+        if(text.length <= 11){
+            //проверили первый символ
+            if((text[0] != '8')||(text[0] != '+')) {
+                return false
+            }
+            else{
+                //проверили второй символ
+                if(text.length >= 2) {
+                    //комбинация +7
+                    if(text[0] == '+'){
+                        return text[1] != '7'
+                    }
+                    else{
+                        return false
+                    }
+                }
+                return false
+            }
+
+        }
+        else{
+            //скорректировали длину номера на случай +7
+            return !((text.length == 12)&&(text[0] == '+')&&(text[1] == '7'))
+        }
+    }
+
+    fun setPrices(productIds : List<Long>) {
+        var sumPriceLocal : Double = 0.0
+        var finalPriceLocal : Double = 0.0
+        var discountPriceLocal : Double = 0.0
+        for (i in 0 until list.size) {
+            for(j in 0 until productIds.size){
+                if(productIds[j] == list[i].getId()){
+                    sumPriceLocal = sumPriceLocal + list[i].getPrice()
+                    finalPriceLocal = finalPriceLocal + list[i].calcDiscountPrice()
+                }
+            }
+        }
+
+        sumPrice = sumPriceLocal
+        finalPrice = finalPriceLocal
+        discountPrice = sumPriceLocal - finalPriceLocal
+    }
+
+    fun makeFinalPrice(price : Double) : String{
+        val finalPrice : String
+        finalPrice  = if (Math.floor(price) == (price)) Math.floor(price).toInt().toString() else String.format("%.2f", price)
+        return finalPrice
+    }
+
 }

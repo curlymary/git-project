@@ -6,18 +6,24 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import com.example.git_project.ui.CatalogActivity.Companion.IS_USER_AUTH
 import com.example.git_project.ui.CatalogActivity.Companion.PRODUCT_ID
 import com.example.git_project.ui.CatalogActivity.Companion.REQUEST_AUTH
-import com.example.git_project.presenter.ProductsPresenter
+import com.example.git_project.presenter.CheckoutPresenter
 import com.example.git_project.R
-import com.example.git_project.presenter.ProductsView
+import com.example.git_project.data.BasketDaoImpl
+import com.example.git_project.presenter.CheckoutView
 import kotlinx.android.synthetic.main.checkout_layout.*
+import moxy.ktx.moxyPresenter
 
-class CheckoutActivity : BaseActivity(),
-    ProductsView
-{
-    private val presenter = ProductsPresenter()
+class CheckoutActivity : BaseActivity(), CheckoutView {
+    private val presenter by moxyPresenter {
+        CheckoutPresenter(
+            BasketDaoImpl(sharedPreferences)
+        )
+    }
+
     private var isAuth : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,48 +33,20 @@ class CheckoutActivity : BaseActivity(),
         val productID = intent.extras?.getInt(PRODUCT_ID, -1)
         Log.d(tag, productID.toString())
 
-        txtTotalSum.text = "2000Р"
-        txtDiscountSum.text = "300Р"
-        txtCostSum.text = "2300Р"
-
         presenter.attachView(this)
 
         btnOrder.setOnClickListener{
-            //Toast.makeText(this,"test", Toast.LENGTH_SHORT).show()
-            isAuth = true
+            Toast.makeText(this,"Ваш заказ оформлен", Toast.LENGTH_SHORT).show()
+            /*isAuth = true
             setResult(REQUEST_AUTH, Intent().apply{
                 putExtra(IS_USER_AUTH, isAuth)
             })
-            startActivityForResult(intent, REQUEST_AUTH)
+            startActivityForResult(intent, REQUEST_AUTH)*/
         }
         setListeners()
-
-        //presenter.totalPricePrint()
-        //presenter.productListPrint()
     }
 
     private fun setListeners (){
-
-        /*txtLastName.onFocusChangeListener = View.OnFocusChangeListener{v, hasFocus ->
-            if(!hasFocus){
-                val visible = if(checkSymbols(txtLastName.text.toString())) false
-                else true
-                txtLastName.ShowError(true)
-            }
-        }*/
-
-        /*txtLastName.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) {
-                val visible = checkSymbols(s.toString())
-                txtLastName.ShowError(visible)
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })*/
 
         txtLastName.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
@@ -151,7 +129,15 @@ class CheckoutActivity : BaseActivity(),
         txtPhoneNumber.ShowError(visible)
     }
 
-    /*override fun printList(productList: List<Product>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }*/
+    override fun setSumPrice(price : String){
+        txtCostSum.text = price + "Р"
+    }
+
+    override fun setDiscountPrice(price : String){
+        txtDiscountSum.text = price + "Р"
+    }
+
+    override fun setFinalPrice(price : String){
+        txtTotalSum.text = price + "Р"
+    }
 }

@@ -1,8 +1,5 @@
 package com.example.git_project
 
-import com.example.git_project.domain.model.Basket
-import com.example.git_project.domain.model.Product
-import org.junit.Test
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
